@@ -6,8 +6,10 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import lombok.Getter;
 
 @Entity
+@Getter
 public class User extends BaseEntity {
     @Column(nullable = false)
     private String name;
