@@ -19,6 +19,6 @@ public class Car extends BaseEntity {
     private String numberPlate;
 
     @ManyToOne
-    @JoinColumn(name = "user_fk", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
 }
