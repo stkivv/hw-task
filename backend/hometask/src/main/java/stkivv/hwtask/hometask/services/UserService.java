@@ -2,6 +2,8 @@ package stkivv.hwtask.hometask.services;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import stkivv.hwtask.hometask.DtoMapper;
@@ -32,12 +34,16 @@ public class UserService {
     }
 
     public List<UserDto> getAllUsers(String find, UserSortMethod sortMethod) {
-        List<User> users = switch (sortMethod) {
-            case ID_ASCENDING -> userRepository.findByNameContainingOrderByIdAsc(find);
-            case ID_DESCENDING -> userRepository.findByNameContainingOrderByIdDesc(find);
-            case NAME_ASCENDING -> userRepository.findByNameContainingOrderByNameAsc(find);
-            case NAME_DESCENDING -> userRepository.findByNameContainingOrderByNameDesc(find);
+        String sortField = switch (sortMethod) {
+            case ID_ASCENDING, ID_DESCENDING -> "id";
+            case NAME_ASCENDING, NAME_DESCENDING -> "name";
         };
+
+        Sort.Direction direction = (sortMethod.name().contains("DESCENDING"))
+                ? Sort.Direction.DESC
+                : Sort.Direction.ASC;
+
+        List<User> users = userRepository.findByNameContaining(find, Sort.by(direction, sortField));
         return users.stream()
                 .map(u -> DtoMapper.mapUserToDto(u))
                 .toList();
