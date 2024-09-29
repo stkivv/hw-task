@@ -26,7 +26,7 @@ public class CarController {
             List<CarDto> cars = carService.getAllCars();
             return ResponseEntity.ok(cars);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(null);
+            return ResponseEntity.badRequest().build();
         }
     }
 
@@ -36,7 +36,7 @@ public class CarController {
             CarDto car = carService.getCarById(id);
             return ResponseEntity.ok().body(car);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(null);
+            return ResponseEntity.badRequest().build();
         }
     }
 }
