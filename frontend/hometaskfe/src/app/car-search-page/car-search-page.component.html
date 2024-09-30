@@ -1,1 +1,59 @@
-<p>car-search-page works!</p>
+<div class="app-car-search-page">
+  <div class="row mb-3">
+    <div class="col mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Find by make, model or numberplate (optional)"
+        aria-label="find"
+        [formControl]="find"
+      />
+    </div>
+    <div class="col mb-3">
+      <input
+        type="number"
+        class="form-control"
+        placeholder="user ID to find all cars for user (optional)"
+        aria-label="userId"
+        [formControl]="userId"
+      />
+    </div>
+    <div class="w-100"></div>
+    <div class="col">
+      <input
+        type="number"
+        class="form-control"
+        placeholder="car ID (optional)"
+        aria-label="carId"
+        [formControl]="carId"
+      />
+    </div>
+    <div class="col">
+      <select
+        class="form-select"
+        id="sorting"
+        aria-label="sort input"
+        [formControl]="sort"
+      >
+        <option value="id:asc">ID ascending (default)</option>
+        <option value="id:desc">ID descending</option>
+        <option value="make:asc">Make ascending</option>
+        <option value="make:desc">Make descending</option>
+        <option value="model:asc">Model ascending</option>
+        <option value="model:desc">Model descending</option>
+        <option value="nrplate:asc">Number plate ascending</option>
+        <option value="nrplate:desc">Number plate descending</option>
+      </select>
+    </div>
+  </div>
+  <button type="submit" (click)="submitForm()" class="btn btn-primary">
+    Search
+  </button>
+  <hr />
+  @if(data) {
+  <h3>Results:</h3>
+  <div class="json-block">
+    <pre>{{ data | json }}</pre>
+  </div>
+  }
+</div>
