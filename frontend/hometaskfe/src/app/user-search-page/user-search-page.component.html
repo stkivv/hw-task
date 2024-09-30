@@ -1,0 +1,45 @@
+<div class="app-user-search-page">
+  <div class="row mb-3">
+    <div class="col">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Name (optional)"
+        aria-label="Name"
+        [formControl]="name"
+      />
+    </div>
+    <div class="col">
+      <input
+        type="number"
+        class="form-control"
+        placeholder="user ID (optional)"
+        aria-label="userId"
+        [formControl]="userId"
+      />
+    </div>
+    <div class="col">
+      <select
+        class="form-select"
+        id="sorting"
+        aria-label="sort input"
+        [formControl]="sort"
+      >
+        <option value="id:asc">ID ascending (default)</option>
+        <option value="id:desc">ID descending</option>
+        <option value="name:asc">Name ascending</option>
+        <option value="name:desc">Name descending</option>
+      </select>
+    </div>
+  </div>
+  <button type="submit" (click)="submitForm()" class="btn btn-primary">
+    Search
+  </button>
+  <hr />
+  @if(data) {
+  <h3>Results:</h3>
+  <div class="json-block">
+    <pre>{{ data | json }}</pre>
+  </div>
+  }
+</div>
