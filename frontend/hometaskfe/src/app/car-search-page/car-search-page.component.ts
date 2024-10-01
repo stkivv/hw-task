@@ -1,8 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { provideHttpClient } from '@angular/common/http';
-import { bootstrapApplication } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -27,14 +25,14 @@ export class CarSearchPageComponent {
     let params = new HttpParams();
 
     if (this.userId.value) {
-      this.doFetch(url + 'users/' + this.userId.value + '/cars', params);
+      this.doGet(url + 'users/' + this.userId.value + '/cars', params);
       return;
     }
 
     url += 'cars';
 
     if (this.carId.value) {
-      this.doFetch(url + '/' + this.carId.value, params);
+      this.doGet(url + '/' + this.carId.value, params);
       return;
     }
     if (this.find.value) {
@@ -43,10 +41,10 @@ export class CarSearchPageComponent {
     if (this.sort.value) {
       params = params.append('sort', this.sort.value);
     }
-    this.doFetch(url, params);
+    this.doGet(url, params);
   }
 
-  private doFetch(url: string, params: HttpParams) {
+  private doGet(url: string, params: HttpParams) {
     this.http.get(url, { params: params }).subscribe({
       next: (response: any) => {
         this.data = response;
@@ -59,6 +57,3 @@ export class CarSearchPageComponent {
   }
 }
 
-bootstrapApplication(CarSearchPageComponent, {
-  providers: [provideHttpClient()],
-});
